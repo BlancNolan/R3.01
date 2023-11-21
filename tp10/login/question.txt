@@ -1,0 +1,13 @@
+ Examinez le formulaire HTML de la vue login.html.
+
+    Quel fichier PHP va recevoir et traiter les données de ce formulaire ? -> index.php
+    Pourquoi l'URL du lien de "Forgotten password?" contient le répertoire "view" ? -> car le repertoire courant est celui de index.php
+    Pourquoi le lien de "Forgotten password?" n'est pas une bonne solution ? -> il ne faut pas passer de view a vue mais utiliser un controler
+    Pourquoi la méthode post est utilisée dans ce formulaire ? -> pour ne pas afficher de mot de passe dans l'url mais plutot dans un corps http
+
+Quand l'utilisateur entre son mot de passe, il n'est pas affiché à l'écran.
+
+    Qu'est-ce qui conditionne ce fonctionnement (dans le HTML et/ou dans le CSS) ? -> le type password de l'input
+    Est-ce que le masquage du mot de passe en entrée (input) avec l'usage de POST est suffisant pour la sécurité de ce mot de passe ? -> non evidemment 
+
+Du coté du PHP (index.php), comment peut-on savoir si l'utilisateur à cliqué sur le bouton "login" ou "new" ? -> avec le valeur du btn submit
