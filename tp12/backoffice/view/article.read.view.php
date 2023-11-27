@@ -17,8 +17,27 @@
   <main>
     <h2>Accès à un article</h2>
     <form action="article.read.ctrl.php" method="get">
-      <!--  COMPLETER LE FORMULAIRE -->
-      <!--  -->
+      <p>
+        <label for="ref">Référence</label>
+        <input type="number" id="ref" name="ref" >
+      </p>
+      <p>
+        <label for="libelle">Libéllé</label>
+        <textarea readonly id="libelle" name="libelle" rows="1" cols="30"><?= $libelle ?></textarea>
+      </p>
+      <p>
+        <label for="categorie">Catégorie</label>
+        <input readonly type="text" id="categorie" name="categorie" value="<?= $categorie ?>">
+      </p>
+      <p>
+        <label for="prix">Prix</label>
+        <input readonly type="number" id="prix" name="prix" value="<?= $prix ?>">
+      </p>
+      <p>
+        <img src="<?= $image?>" alt="Photo produit">
+      </p>
+      <button type="submit" name="search">Rechercher</button>
+
     </form>
     <?php if (isset($error) && count($error) != 0) : ?>
       <output class="error">
@@ -27,7 +46,7 @@
           <?php foreach ($error as $ligne) : ?>
             <li>
               <?= $ligne ?>
-              <//li>
+              </li>
             <?php endforeach; ?>
           </ul>
         </output>

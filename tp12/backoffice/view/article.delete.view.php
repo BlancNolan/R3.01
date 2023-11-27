@@ -19,8 +19,26 @@
     <!-- On montre l'article que si la référence est définie -->
     <?php if(isset($ref)) : ?>
       <form  action="article.delete.ctrl.php" method="get">
-        <!--  COMPLETER LE FORMULAIRE -->
-        <!--  -->
+      <p>
+        <label for="ref">Référence</label>
+        <input readonly type="number" id="ref" name="ref" value="<?= $ref ?>">
+      </p>
+      <p>
+        <label for="libelle">Libéllé</label>
+        <textarea readonly id="libelle" name="libelle" rows="1" cols="30"><?= $libelle ?></textarea>
+      </p>
+      <p>
+        <label for="categorie">Catégorie</label>
+        <input readonly type="text" id="categorie" name="categorie" value="<?= $categorie ?>">
+      </p>
+      <p>
+        <label for="prix">Prix</label>
+        <input readonly type="number" step=".01" id="prix" name="prix" value="<?= $prix ?>">
+      </p>
+      <p>
+        <img src="<?= $image?>" alt="Photo produit">
+      </p>
+      <button type="submit" name="suppr">Supprimmer</button>
       </form>
     <?php endif ?>
     <?php if (isset($error) && count($error) != 0) : ?>
@@ -30,7 +48,7 @@
           <?php foreach ($error as $ligne) : ?>
             <li>
               <?= $ligne ?>
-              <//li>
+              </li>
             <?php endforeach; ?>
           </ul>
         </output>

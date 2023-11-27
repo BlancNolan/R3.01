@@ -11,5 +11,12 @@ include_once(__DIR__."/../model/Article.class.php");
 // A COMPLETER
 ///////////////////////////////////////////////////////
 
+$methode = key($_GET);
+$viewType = $_GET[$methode]??"";
+
+$view = new View();
+$view->display("{$viewType}.view.php");
+
+
 // 
 ?>
