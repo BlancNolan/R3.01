@@ -15,7 +15,7 @@ switch ($action) {
                 $time = new Time($timeZone);
                 $out = $time->jsonSerialize();
             }catch(Exception $e){
-                $out['error'] = 'timeZone inéxistant';
+                $out['error'] = 'timeZone inexistant';
             }
         }else{
             $out['error'] = 'timeZone missing for read';

@@ -17,13 +17,8 @@ class Time {
     }
     dao.query(params,
       function (answer) {
-        // 
-        ///////////////////////////////////////////////////////
-        // A COMPLETER
-        ///////////////////////////////////////////////////////
-
-        //  
-
+          let time = new Time(answer.timeZone, answer.date)
+          onAnswser(time);
       }
     );
   }

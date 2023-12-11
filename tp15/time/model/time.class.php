@@ -18,7 +18,7 @@ class Time implements JsonSerializable
   // Transforme la date en une chaine
   public function dateToString() : string
   {
-     return $this->dateTime->format(DateTimeInterface::ISO8601);
+     return $this->dateTime->format(DateTimeInterface::RFC850);
   }
 
   // Informations à produire quand l'objet est tranformé en JSON
