@@ -64,11 +64,8 @@ if (!$connected){
             break;
     }
 
-
     $view->display("{$viewType}.view.php");
 }
-
-
 
 // 
 ?>
