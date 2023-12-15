@@ -20,11 +20,8 @@ class Contact implements JsonSerializable
 
 
   public function jsonSerialize() : mixed
-  { // 
-    ///////////////////////////////////////////////////////
-    //  A COMPLETER
-    ///////////////////////////////////////////////////////
-    // 
+  { 
+    return get_object_vars($this); 
   }
 
   // Getters

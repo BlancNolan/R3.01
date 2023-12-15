@@ -8,11 +8,8 @@ const view = {
     
     // Fonction qui affiche un contact dans la table
     show: function (contacts) {
-        // 
-        ///////////////////////////////////////////////////////
-        //  A COMPLETER
-        ///////////////////////////////////////////////////////
-        // 
+        let tr = view.tbody.firstElementChild();
+        
     },
 
     //  
