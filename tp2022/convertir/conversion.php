@@ -1,5 +1,12 @@
 <?php
-//   Ecrire votre PHP ici 
+
+$tInput = $_GET['tInput'] ?? '';
+
+if($tInput == ''){
+  $tOuput = 'X';
+}else{
+  $tOuput = (float)$tInput* pi() / 180.0;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -10,11 +17,11 @@
   </head>
   <body>
     <h1>Conversion Degré/Radian</h1>
-    <form  action="conversion1.php" method="get"> 
-      <input id="tInput" type="number" step="any" name="tInput" value="">
+    <form  action="conversion.php" method="get"> 
+      <input id="tInput" type="number" step="any" name="tInput" value="<?= $tInput?>">
       <label for="tInput">Degré</label>
       égal
-      <output id="tOutput" name="tOutput">X</output> radian 
+      <output id="tOutput" name="tOutput"><?= $tOuput?></output> radian 
       <button type="submit" name="action" value="convertir">Convertir</button>
     </form>
   </body>
