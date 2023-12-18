@@ -11,11 +11,17 @@ $action = $_GET['action'] ?? '';
 switch ($action) {
     // Suppressions des contacts sachant leur id
     case 'delete':
-        // 
-        ///////////////////////////////////////////////////////
-        //  A COMPLETER
-        ///////////////////////////////////////////////////////
-        // 
+        $id = $_GET['id'] ??'';
+        if ($id == ''){
+            $out['error'] = "id missing for delete";
+            break;
+        }
+        try{
+            $contact = Contact::read($id);
+            $contact->delete();
+        }catch(Exception $e){
+            $out['error'] = $e->getMessage();
+        }
         break;
     default:
         $out['error'] = 'incorrect action';

@@ -70,11 +70,20 @@ class DAO
   // Exécute une requête sur la BD. Pas de retour
   public function exec(string $query, array $data): void
   {
-    // 
-    ///////////////////////////////////////////////////////
-    //  A COMPLETER
-    ///////////////////////////////////////////////////////
-    // 
+    try {
+      // Compile la requête, produit un PDOStatement
+      $s = $this->db->prepare($query);
+      // Exécute la requête avec les données
+      $s->execute($data);
+    } catch (Exception $e) {
+      // Attrape l'exception pour y ajouter la requête
+      throw new PDOException(__METHOD__ . " at " . __LINE__ . ": " . $e->getMessage() . " Query=\"" . $query . '"');
+    }
+
+    // Affiche en clair l'erreur PDO si la requête ne peut pas s'exécuter
+    if ($s < 1) {
+      throw new PDOException(__METHOD__ . " at " . __LINE__ . ": " . implode('|', $this->db->errorInfo()) . " Query=\"" . $query . '"');
+    }
   }
 
   // Demande l'identifiant du dernier élémnt qui a été inséré

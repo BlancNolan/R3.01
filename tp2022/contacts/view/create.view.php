@@ -23,12 +23,30 @@
     <button form="form" formaction="create.ctrl.php">Ajouter</button>
   </aside>
   <main>
-    <!--
-    // 
-    ///////////////////////////////////////////////////////
-    //  A COMPLETER
-    ///////////////////////////////////////////////////////
-    //  -->
+  <form id="form">
+      <table>
+        <tbody>
+          <tr>
+            <th>Nom</th>
+            <td>
+              <input type="text" name="nom" placeholder="indiquer le nom">
+            </td>
+          </tr>
+          <tr>
+            <th>Prénom</th>
+            <td>
+              <input type="text" name="prenom" placeholder="indiquer le prénom">
+            </td>
+          </tr>
+          <tr>
+            <th>Mobile</th>
+            <td>
+              <input type="text" name="mobile" placeholder="indiquer le No de téléphone mobile">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
   </main>
 </body>
 

@@ -72,12 +72,13 @@ class Contact implements JsonSerializable
     // Cet objet ne doit pas être déjà dans la base donc son id doit être -1
     if ($this->id !== -1) {
       throw new Exception("Create impossible : déjà dans la base avec cet id=" . $this->id);
+    }else{
+      $query = "INSERT INTO contact (prenom,nom,mobile) VALUES (?,?,?)";
+      $data = ["$this->prenom", "$this->nom", $this->mobile];
+      $dao = DAO::get();
+      $dao->exec($query, $data);
+      $this->id = $dao->lastInsertId();
     }
-    // 
-    ///////////////////////////////////////////////////////
-    //  A COMPLETER
-    ///////////////////////////////////////////////////////
-    // 
   }
 
   /////////////////////////// READ /////////////////////////////////////
@@ -87,21 +88,42 @@ class Contact implements JsonSerializable
   // Lève une exception si non trouvé
   public static function read(int $id): Contact
   {
-    // 
-    ///////////////////////////////////////////////////////
-    //  A COMPLETER
-    ///////////////////////////////////////////////////////
-    // 
+    $query = "SELECT * from contact where id = ?";
+    $data = [$id];
+    $dao = DAO::get();
+    
+      $tab = $dao->query($query, $data);
+      if (count($tab) == 0) {
+        throw new Exception("Erreur:  contact $id non trouvée");
+      }
+      // Il ne peux pas y avoir plus d'une instance avec cet id
+      if (count($tab) > 1) {
+        throw new Exception("Incohérence:  contact $id existe en ".count($tab)." exemplaires");
+      }
+      $contact = $tab[0];
+      $res = new Contact($contact['nom'], $contact['prenom'], $contact['mobile']);
+      $res->id = $id;
+      return $res;
   }
 
   // Recherche d'une liste de contacts dont le nom ou le prénom débute par $pattern
   public static function readFromLike(string $pattern): array
   {
-    // 
-    ///////////////////////////////////////////////////////
-    //  A COMPLETER
-    ///////////////////////////////////////////////////////
-    // 
+    // Acces au DAO
+    $dao = DAO::get();
+    $query = "SELECT * FROM contact WHERE nom like ? or prenom like ?";
+    $data = ["$pattern%", "$pattern%"];
+    $table = $dao->query($query, $data);
+    // Récupération des données dans un array
+    $contacts = [];
+    foreach ($table as $row) {
+      $contact = new Contact($row['nom'], $row['prenom'], $row['mobile']);
+      // Ajoute l'id, car il n'est pas dans le constructeur
+      $contact->id = $row['id'];
+      // Ajoute le nouvel objets à la liste
+      $contacts[] = $contact;
+    }
+    return $contacts;
   }
 
   /////////////////////////// UPDATE /////////////////////////////////////
@@ -112,12 +134,11 @@ class Contact implements JsonSerializable
   {
     if ($this->id === -1) {
       throw new Exception("Update impossible : ce contact n'est pas dans la base");
+    }else{
+      $query = "UPDATE contact set(nom, prenom, mobile) = (?,?,?) where id = ?";
+      $data = ["$this->nom", "$this->prenom", $this->mobile, $this->id];
+      $dao = DAO::get()->exec($query, $data);
     }
-    // 
-    ///////////////////////////////////////////////////////
-    //  A COMPLETER
-    ///////////////////////////////////////////////////////
-    // 
   }
 
   /////////////////////////// DELETE /////////////////////////////////////
@@ -127,12 +148,12 @@ class Contact implements JsonSerializable
   {
     if ($this->id === -1) {
       throw new Exception("Delete impossible : ce contact n'est pas dans la base");
+    }else {
+      $query = "DELETE from contact where id = ?";
+      $data = [$this->id];
+      $dao = DAO::get()->exec($query, $data);
+      $this->id = -1;
     }
-    // 
-    ///////////////////////////////////////////////////////
-    //  A COMPLETER
-    ///////////////////////////////////////////////////////
-    // 
   }
 }
 ?>

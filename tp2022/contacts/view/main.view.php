@@ -14,7 +14,7 @@
       <a href="main.ctrl.php">
       <img src="../view/design/img/contacts_60.png" alt="Icon contact"> Contacts
       </a>
-      <form action="search.ctrl.php">
+      <form action="search.ctrl.php" methode="GET">
         <input type="text" placeholder="Rechercher" name="pattern" value="<?=$pattern?>">
       </form>
     </h1>
