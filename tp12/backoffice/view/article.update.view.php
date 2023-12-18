@@ -34,7 +34,7 @@
         <input type="number" step=".01" id="prix" name="prix" value="<?= $prix ?>">
       </p>
       <p>
-        <img src="<?= $image?>" alt="Photo produit">
+        <img src="<?= $imageURL?>" alt="Photo produit">
       </p>
       <button type="submit" name="update">Modifier</button>
     </form>

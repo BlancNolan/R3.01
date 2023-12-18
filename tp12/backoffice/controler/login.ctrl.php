@@ -10,16 +10,22 @@ include_once(__DIR__."/../framework/view.class.php");
 //creation de variable login password et connected
 $login = $_POST["login"]??null;
 $password = $_POST["password"]??null;
-$connected = false;
 
-//ouverture de la session
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Partie calculs avec le modèle
+///////////////////////////////////////////////////////////////////////////////
+
+if ($login == 'admin' && $password == 'admin') {
+  $connected = true;
+} else {
+  $connected = false;
+}
+
 session_start();
+$_SESSION['connected'] = $connected;
 
-//insertion de login dans $_SESSION
-$_SESSION['login'] = $login;
-session_write_close();
-
-if(isset($_SESSION['login']) && $_SESSION['login'] != '' && $login == "invite" & $password == "invite") $connected = true;
 
 
 ////////////////////////////////////////////////////////////////////////////

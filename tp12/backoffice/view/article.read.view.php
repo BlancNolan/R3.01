@@ -19,11 +19,11 @@
     <form action="article.read.ctrl.php" method="get">
       <p>
         <label for="ref">Référence</label>
-        <input type="number" id="ref" name="ref" >
+        <input type="number" id="ref" name="ref" value="<?= $ref ?>">
       </p>
       <p>
         <label for="libelle">Libéllé</label>
-        <textarea readonly id="libelle" name="libelle" rows="1" cols="30"><?= $libelle ?></textarea>
+        <textarea id="libelle" name="libelle" rows="1" cols="30"><?= $libelle ?></textarea>
       </p>
       <p>
         <label for="categorie">Catégorie</label>
@@ -34,7 +34,7 @@
         <input readonly type="number" id="prix" name="prix" value="<?= $prix ?>">
       </p>
       <p>
-        <img src="<?= $image?>" alt="Photo produit">
+        <img src="<?= $imageURL?>" alt="Photo produit">
       </p>
       <button type="submit" name="search">Rechercher</button>
 

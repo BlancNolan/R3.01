@@ -53,9 +53,9 @@ class Article {
   public function getImageURL() : string {
     
     if($this->image[0] =="/")
-      return self::localURL.getImage();
+      return self::localURL.$this->image;
     else
-      return self::distantURL.getImage();
+      return self::distantURL.$this->image;
   }
 
   // Setter
@@ -148,7 +148,10 @@ class Article {
     $table = $dao->query("SELECT * FROM article order by ref LIMIT $offset, $pageSize");
     $articles = array();
     foreach($table as $article){
-      $articles[] = Article::read($article['ref']);
+      // Recupération de la catégorie qui doit être un objet
+      $categorie = Categorie::read($row['categorie']);
+      // Ajoute un article à la liste
+      $articles[] = new Article($row['ref'],$row['libelle'],$categorie,$row['prix'],$row['image']);
     }
 
     return $articles;
@@ -167,7 +170,11 @@ class Article {
     $table = $dao->query("SELECT * FROM article WHERE categorie = $id order by ref LIMIT $offset, $pageSize");
     $articles = array();
     foreach($table as $article){
-      $articles[] = Article::read($article['ref']);
+      // Recupération de la catégorie qui doit être un objet
+      $categorie = Categorie::read($row['categorie']);
+      // Ajoute un article à la liste
+      $articles[] = new Article($row['ref'],$row['libelle'],$categorie,$row['prix'],$row['image']);
+    
     }
 
     return $articles;
@@ -196,10 +203,6 @@ class Article {
   public function delete() {
     $dao = DAO::get();
     $ref = $this->ref;
-    $libelle = $this->libelle;
-    $cat = $this->categorie->getId();
-    $prix = $this->prix;
-    $img = $this->image;
 
     $res = $dao->exec("DELETE FROM article where ref = $ref");
     if($res != 1)
